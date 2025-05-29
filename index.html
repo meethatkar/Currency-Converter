@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+</head>
+
+<body>
+    <main>
+        <h1>
+            Currency Converter
+        </h1>
+        <div id="amount">
+            <p> Enter Amount </p>
+            <input type="text" value="1" id="amtVal" name="amtVal">
+        </div>
+        <div id="converter">
+            <div id="from">
+                <p> From </p>
+                <div class="selection">
+                    <img src="" alt="">
+                    <select name="from">
+                        <!-- <option value="USD">USD</option> -->
+                    </select>
+                </div>
+            </div>
+            <i class="ri-swap-2-line"></i>
+            <div id="to">
+                <p> To </p>
+                <div class="selection">
+                    <img src="" alt="">
+                    <select name="to">
+                        <!-- <option value="INR">INR</option> -->
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div id="changeVal">
+            <p> conversion rate </p>
+        </div>
+        <button> Get Exchange Rate </button>
+        <h2> Get Result here </h2>
+    </main>
+    <script src="codes.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
