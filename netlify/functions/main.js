@@ -1,6 +1,6 @@
 const { log } = require("console");
 const { json } = require("stream/consumers");
-
+// const fetch = require('node-fetch');
 
 const BASE_URL = "https://v6.exchangerate-api.com/v6/";
 const API_KEY = process.env.API_KEY;
