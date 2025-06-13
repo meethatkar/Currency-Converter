@@ -14,7 +14,7 @@ html,body{
 }
 main{
     position: relative;
-    min-height: 50vh;
+    min-height: 40vh;
     width: 37%;
     background-color: #cccccc;
     display: flex;
@@ -93,4 +93,43 @@ main>button{
     color: white;
     font-weight:700;
     background-color: #343a40;
+}
+
+@media(max-width:1000px){
+    main{
+        width: 57%;
+    }
+    main>h1{
+        font-size: 4.5vw;
+    }
+    #amount{
+        font-size: 3vw;
+    }
+    #amount>input{
+        font-size: 3vw;
+    }
+    #converter>i{
+        font-size: 4.5vw;
+    }
+    #from>p,#to>p{
+        font-size: 3vw;
+    }
+    .selection>select{
+        font-size: 2vw;
+    }
+    #changeVal{
+        font-size: 2.5vw;
+    }
+    main>button{
+        font-size: 2vw;
+    }
+    main>h2{
+        font-size: 3.5vw;
+    }
+}
+@media(max-width:350px){
+    .selection{
+        font-size: 2vw;
+        padding: 0px 0px;
+    }
 }

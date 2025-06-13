@@ -1,14 +1,12 @@
 // import countryList from codes.js;
-const baseURL = "https://v6.exchangerate-api.com/v6/0f0fb885e0fb4ed3effdae08/latest/";
-
 var fromDiv = document.querySelector("#from select");
 var toDiv = document.querySelector("#to select");   //TO GET NAME OF TO COUNTRY AND SET IMAGE AS PER THAT
 var dropdown = document.querySelectorAll(".selection select"); //TO DISPLAY ALL LIST OF CONTREIS FROM CODES.JS FILE
 var changeValDiv = document.querySelector("#changeVal");    //TO DISPLAY CURRENT VALUE OF THAT CURRENCY
 var btn = document.querySelector("main button");    //TO MAKE THINGS WORK WHEN CLICKED
-var amtVal =document.querySelector("#amtVal");
+var amtVal = document.querySelector("#amtVal");
 var mainRes = document.querySelector("main h2");
-let finalVal=0;
+let finalVal = 0;
 let convertedRatesArr = "";
 let data = "";
 let currCode = "";
@@ -28,10 +26,13 @@ for (let select of dropdown) {
         // console.log(evt);
         updateFlag(evt.target);         //in target we have list of options (i.e 159 countries)
         if (select.name == "from") {
-            updateExchangeRate(evt.target);
+            updateExchangeRate(evt.target.value);
+            frmCnt = evt.target.value;
+            // console.log(frmCnt);
         }
         else if (select.name == "to") {
-            getTodivCountry(evt.target);
+            getTodivCountry(evt.target.value);
+            toCnt = evt.target.value;
         }
     })
 }
@@ -46,47 +47,58 @@ function updateFlag(elem) {
 }
 
 async function updateExchangeRate(elem, toCnt = "INR") {
-    frmCnt = elem.value;
+    frmCnt = elem;
     var amtVal = document.querySelector("#amtVal");
     if (amtVal.value == "" || amtVal.value < 1) {
         amtVal.value = 1;
     }
 
-    currCode = elem.value;      //will give USD, INR, AUD, etc value
-    const URL = baseURL + currCode;
+    currCode = elem;      //will give USD, INR, AUD, etc value
+    // const URL = baseURL + currCode;
     // var response = await fetch(URL);
-    var response = await fetch('/.netlify/functions/main',{
+    var response = await fetch('/.netlify/functions/main', {
         method: 'POST',
         body: JSON.stringify({
             code: currCode,
         })
     });
-    console.log(response.body);
     data = await response.json();
     console.log(data);
     
-    convertedRatesArr = data.conversion_rates;
-    console.log(convertedRatesArr);
+    if (data.result == "success") {
+        convertedRatesArr = data.conversion_rates;
+        // console.log(convertedRatesArr);
+        changeValDiv.innerText = `1 ${currCode} = ${convertedRatesArr[toCnt]} ${toCnt}`;
+        finalVal = amtVal.innerText * convertedRatesArr[toCnt];
+    }
+    else {
+        alert("error occured");
+    }
+}
+
+function getRates(){
     changeValDiv.innerText = `1 ${currCode} = ${convertedRatesArr[toCnt]} ${toCnt}`;
-    finalVal = amtVal.innerText*convertedRatesArr[toCnt];
-    console.log("from: ",finalVal);
+    finalVal = amtVal.value * convertedRatesArr[toCnt];
+    finalVal = finalVal.toFixed(3);
 }
 
 function getTodivCountry(elem) {
-    toCnt = elem.value;
+    toCnt = elem;
     convertedRatesArr = data.conversion_rates;
     // console.log(convertedRatesArr[elem.value]);
-    changeValDiv.innerText = `1 ${currCode} = ${convertedRatesArr[elem.value]} ${elem.value}`;
-    finalVal = amtVal.value*convertedRatesArr[elem.value];
-    console.log("to: ",finalVal);
+    getRates();
 }
 
-btn.addEventListener("click",function(){
+btn.addEventListener("click", function () {
+    updateExchangeRate(frmCnt, toCnt);
+    getRates();
     mainRes.innerText = `${amtVal.value} ${frmCnt} = ${finalVal} ${toCnt}`;
 });
 
-amtVal.addEventListener("keydown",function(event){
-  if (event.code === 'Enter' || event.key === 'Enter' || event.keyCode === 13) {
-    mainRes.innerText = `${amtVal.value} ${frmCnt} = ${finalVal} ${toCnt}`;
-  }
+amtVal.addEventListener("keydown", function (event) {
+    if (event.code === 'Enter' || event.key === 'Enter' || event.keyCode === 13) {
+        updateExchangeRate(frmCnt, toCnt);
+        getRates();
+        mainRes.innerText = `${amtVal.value} ${frmCnt} = ${finalVal} ${toCnt}`;
+    }
 })
