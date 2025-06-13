@@ -1,0 +1,24 @@
+{
+  "name": "currency-converter",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/meethatkar/Currency-Converter#readme",
+  "bugs": {
+    "url": "https://github.com/meethatkar/Currency-Converter/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meethatkar/Currency-Converter.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "devenv": "^1.0.1",
+    "node-fetch": "^3.3.2"
+  }
+}

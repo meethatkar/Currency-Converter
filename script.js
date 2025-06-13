@@ -26,7 +26,7 @@ for (let select of dropdown) {
     }
     select.addEventListener("change", (evt) => {
         // console.log(evt);
-        updateFlag(evt.target);         //in target we have list of options (i.r 159 countries)
+        updateFlag(evt.target);         //in target we have list of options (i.e 159 countries)
         if (select.name == "from") {
             updateExchangeRate(evt.target);
         }
@@ -54,9 +54,17 @@ async function updateExchangeRate(elem, toCnt = "INR") {
 
     currCode = elem.value;      //will give USD, INR, AUD, etc value
     const URL = baseURL + currCode;
-    var response = await fetch(URL);
-    // console.log(response);
+    // var response = await fetch(URL);
+    var response = await fetch('/.netlify/functions/main',{
+        method: 'POST',
+        body: JSON.stringify({
+            code: currCode,
+        })
+    });
+    console.log(response);
     data = await response.json();
+    console.log(data);
+    
     convertedRatesArr = data.conversion_rates;
     // console.log(convertedRatesArr[toCnt]);
     changeValDiv.innerText = `1 ${currCode} = ${convertedRatesArr[toCnt]} ${toCnt}`;
