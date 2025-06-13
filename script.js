@@ -61,12 +61,12 @@ async function updateExchangeRate(elem, toCnt = "INR") {
             code: currCode,
         })
     });
-    console.log(response);
+    console.log(response.body);
     data = await response.json();
     console.log(data);
     
     convertedRatesArr = data.conversion_rates;
-    // console.log(convertedRatesArr[toCnt]);
+    console.log(convertedRatesArr);
     changeValDiv.innerText = `1 ${currCode} = ${convertedRatesArr[toCnt]} ${toCnt}`;
     finalVal = amtVal.innerText*convertedRatesArr[toCnt];
     console.log("from: ",finalVal);
