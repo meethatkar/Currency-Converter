@@ -50,6 +50,7 @@ main>h1{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    align-items: center;
     width: 90%;
     /* background-color: #8a7e72; */
     padding: 2% 2%;
@@ -127,9 +128,46 @@ main>button{
         font-size: 3.5vw;
     }
 }
-@media(max-width:350px){
-    .selection{
-        font-size: 2vw;
+@media(max-width:500px){
+    .selection>select{
+        font-size: 3vw;
         padding: 0px 0px;
+    }
+    main{
+        width: 90%;
+        /* min-height: 70vh; */
+    }
+    main>h1{
+        font-size: 6vw;
+    }
+    #amount,#amount>input{
+        font-size: 4vw;
+        text-align: center;
+    }
+    #converter{
+        flex-direction: column;
+        width: 65%;
+    }
+    #from,#to{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 5% 0%;
+    }
+    #converter>i{
+        font-size: 6.5vw;
+    }
+    #from>p,#to>p{
+        font-size: 4.5vw;
+    }
+    #changeVal{
+        font-size: 5.5vw;
+    }
+    main>button{
+        width: 70%;
+        font-size: 3.5vw;
+    }
+    main>h2{
+        font-size: 5vw;
     }
 }
